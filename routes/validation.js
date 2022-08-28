@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-const { body, validationResult } = require('express-validator')
+const { body, validationResult } = require("express-validator");
 const slugify = require("slugify");
 
 const users = require("../users.json");
@@ -29,7 +29,7 @@ app.post(
   body("city")
     .isIn(["Paris", "Tokyo", "Los Angeles"])
     .withMessage("You're not from Paris, Tokyo or Los Angeles, sorry."),
-    body("profile_picture").exists(),
+  body("profile_picture").exists(),
   (req, res) => {
     const { errors } = validationResult(req);
 
@@ -38,7 +38,7 @@ app.post(
     } else {
       const user = req.body;
       user.slug = slugify(user.name);
-    users.push(user);
+      users.push(user);
       res.json(user);
     }
   }
